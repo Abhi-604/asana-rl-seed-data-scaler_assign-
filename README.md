@@ -85,6 +85,26 @@ output/asana_simulation.sqlite
 
 ---
 
+## 📦 Database Access
+
+Due to file size constraints, the generated SQLite database is not stored directly in the repository.
+
+The final database file (`asana_simulation.sqlite`) can be downloaded from the following link:
+
+https://drive.google.com/file/d/1HmBxZtQc4x0ne_uX45DlpGTR8bPRKvEO/view?usp=sharing
+
+After downloading, place the file in:
+
+```
+output/asana_simulation.sqlite
+```
+
+Alternatively, the database can be regenerated locally by running:
+
+```bash
+python src/main.py
+```
+
 ## 🔁 Reproducibility & Design Choices
 
 - The database is **regenerated from scratch on each run** to ensure consistency.
