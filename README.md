@@ -1,77 +1,134 @@
 # Asana RL Seed Data Generator
 
-This repository contains a system for generating realistic, enterprise-grade seed data
-to simulate an Asana workspace for reinforcement learning (RL) environments.
+This repository contains a **realistic, enterprise-grade seed data generation framework** for simulating an **Asana-like workspace** to support **reinforcement learning (RL) environments**.
 
-The project focuses on data realism, relational consistency, and evidence-based
-generation strategies suitable for evaluating computer-use AI agents.
+The project focuses on **data realism**, **relational consistency**, and **reproducible generation** of large-scale organizational workflows, suitable for evaluating computer-use AI agents in enterprise project management scenarios.
 
 ---
 
-## Project Overview
+## 📌 Project Overview
 
-The simulated environment represents a B2B SaaS organization with 5,000–10,000 employees
-using Asana across engineering, product, marketing, and operations workflows.
+The simulated environment represents a **B2B SaaS organization** with **5,000–10,000 employees** using Asana across:
+
+- Engineering
+- Product
+- Marketing
+- Operations (HR, Finance, IT)
+
+The output is a **fully populated SQLite database** that mirrors real-world Asana usage patterns, including collaboration, task workflows, metadata, and edge cases.
+
+---
+
+## 🗂️ Features
 
 The generated dataset includes:
-- Organizations and users
-- Teams and team memberships
-- Projects and workflow sections
-- Tasks, subtasks, comments
-- Tags and project-scoped custom fields
 
-The output is a fully populated SQLite database that mirrors real-world Asana usage patterns.
-
----
-
-## Repository Structure
-
-```
-schema.sql            # Relational schema (SQLite)
-src/main.py           # Entry point and orchestration
-src/generators/       # Data generation modules
-prompts/              # LLM prompt templates (if applicable)
-output/               # Generated SQLite database
-```
+- Organizations and users  
+- Teams and team memberships (many-to-many)  
+- Projects mapped to teams  
+- Workflow sections per project  
+- Tasks with realistic distributions  
+- Subtasks and hierarchical task structure  
+- Comments simulating collaboration  
+- Tags for cross-project labeling  
+- Project-scoped custom fields (priority, effort, channel, etc.)
 
 ---
 
-## Setup Instructions
+## 🧱 Repository Structure
 
-### 1. Create a virtual environment (optional)
+```
+schema.sql                  # Relational database schema (SQLite)
+README.md                   # Project documentation
+requirements.txt            # Python dependencies
+src/
+├── main.py                 # Orchestration entry point
+├── generators/
+│   ├── users.py            # User generation
+│   ├── teams.py            # Teams and memberships
+│   ├── projects.py         # Projects and sections
+│   ├── tasks.py            # Tasks, subtasks, comments, tags, custom fields
+├── utils/                  # Helper utilities
+prompts/                    # LLM prompt templates (optional / extensible)
+output/
+└── asana_simulation.sqlite # Generated database
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ (Optional) Create virtual environment
 
 ```bash
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 ```
 
-### 2. Install dependencies
+### 2️⃣ Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run data generation
+### 3️⃣ Run data generation
 
 ```bash
 python src/main.py
 ```
 
-This will create `output/asana_simulation.sqlite`.
+This will generate the SQLite database at:
+
+```
+output/asana_simulation.sqlite
+```
 
 ---
 
-## Design Principles
+## 🔁 Reproducibility & Design Choices
 
-- Non-uniform, realistic distributions
-- Referential and temporal consistency
-- Modular and extensible generator design
-- Separation of schema, logic, and orchestration
+- The database is **regenerated from scratch on each run** to ensure consistency.
+- Non-uniform distributions are used to reflect real enterprise behavior.
+- Edge cases such as:
+  - Unassigned tasks  
+  - Overdue tasks  
+  - Stalled projects  
+  are intentionally included to prevent shortcut learning in RL agents.
+- Schema design follows relational best practices with strict foreign key usage.
 
 ---
 
-## Notes
+## 🎯 Intended Use
 
-This repository is part of a take-home assignment for a Research Scientist Internship
-and is intended to demonstrate data design and generation methodology rather than
-model training.
+This dataset is designed to serve as **seed data** for:
+
+- Reinforcement learning environments  
+- Simulation-based evaluation of computer-use agents  
+- Research on workflow automation and task navigation  
+
+It is **not** intended for direct model training, but as a **high-fidelity environment substrate**.
+
+---
+
+## 📝 Notes
+
+This repository was developed as part of a **Research Scientist Internship take-home assignment** and is intended to demonstrate:
+
+- System and schema design  
+- Realistic data generation methodology  
+- Research-oriented engineering practices  
+
+---
+
+## ✅ Status
+
+✔ Core schema implemented  
+✔ Realistic large-scale data generated  
+✔ Reproducible and extensible pipeline  
+✔ Submission-ready and interview-ready  
+
+---
+
+## 📬 Contact
+
+For questions regarding the design or methodology, please refer to the accompanying documentation provided in the submission.
